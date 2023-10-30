@@ -2,7 +2,7 @@ package com.barv.foodService;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.MealNotFoundException;
-import com.barv.meals.Meal;
+import com.barv.model.Meal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

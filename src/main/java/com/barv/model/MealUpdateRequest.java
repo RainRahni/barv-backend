@@ -1,5 +1,6 @@
-package com.barv.meals;
+package com.barv.model;
 
+import com.barv.model.Meal;
 import lombok.Getter;
 import lombok.Setter;
 

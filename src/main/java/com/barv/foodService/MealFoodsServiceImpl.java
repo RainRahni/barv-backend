@@ -2,13 +2,11 @@ package com.barv.foodService;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.foodRepository.MealFoodsRepository;
-import com.barv.meals.Meal;
-import com.barv.meals.MealFoods;
+import com.barv.model.MealFoods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MealFoodsServiceImpl implements MealFoodsService {

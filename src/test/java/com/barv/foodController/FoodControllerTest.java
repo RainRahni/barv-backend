@@ -2,8 +2,7 @@ package com.barv.foodController;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
-import com.barv.food.Food;
-import com.barv.foodService.FoodService;
+import com.barv.model.Food;
 import com.barv.foodService.FoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -2,7 +2,7 @@ package com.barv.foodController;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
-import com.barv.food.Food;
+import com.barv.model.Food;
 import com.barv.foodService.FoodServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/food" )

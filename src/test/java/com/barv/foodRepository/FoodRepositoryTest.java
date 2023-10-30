@@ -1,6 +1,6 @@
 package com.barv.foodRepository;
 
-import com.barv.food.Food;
+import com.barv.model.Food;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

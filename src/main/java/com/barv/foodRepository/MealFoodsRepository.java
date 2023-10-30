@@ -1,6 +1,6 @@
 package com.barv.foodRepository;
 
-import com.barv.meals.MealFoods;
+import com.barv.model.MealFoods;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

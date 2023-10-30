@@ -1,18 +1,14 @@
 package com.barv.foodService;
 
-import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
-import com.barv.food.Food;
+import com.barv.model.Food;
 import com.barv.foodRepository.FoodRepository;
-import com.barv.foodService.FoodService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
