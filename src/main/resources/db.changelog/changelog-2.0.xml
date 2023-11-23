@@ -1,0 +1,88 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="your_name" id="your_id">
+        <createType type="enum" name="meal_type">
+            <value>BREAKFAST</value>
+            <value>PRE_LUNCH</value>
+            <value>LUNCH</value>
+            <value>PRE_DINNER</value>
+            <value>DINNER</value>
+            <value>SNACK</value>
+        </createType>
+    </changeSet>
+    <changeSet author="Rain" id="1">
+        <createTable name="food">
+            <column autoIncrement="true" name="id" startWith="1" type="bigint">
+                <contstraints nullable="false" primaryKey="true" primaryKeyName="food_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calories" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protein" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbs" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fats" type="double precision">
+                <contstraints nullable="false"/>
+            </column>
+            <column name="weight_in_grams" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Rain" id="2">
+        <createTable name="meal">
+            <column autoIncrement="true" name="id" startWith="1" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="meal_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="meal_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calories" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protein" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbs" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fats" type="double precision">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Rain" id="3">
+        <createTable name="meal_foods">
+            <column autoIncrement="true" name="id" startWith="1" type="bigint" defaultValueComputed="nextval('public.meal_foods_sequence'::REGCLASS)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="meal_foods_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meal_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="food_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Rain" id="4">
+        <addForeignKeyConstraint baseColumnNames="food_id" baseTableName="meal_foods" constraintName="meal_foods_food_id_fk" referencedColumnNames="id" referencedTableName="food"/>
+    </changeSet>
+    <changeSet author="Rain" id="5">
+        <addForeignKeyConstraint baseColumnNames="meal_id" baseTableName="meal_foods" constraintName="meal_foods_meal_id_fk" referencedColumnNames="id" referencedTableName="meal"/>
+    </changeSet>
+</databaseChangeLog>
