@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/meal" )
+@RequestMapping(path = "meal" )
 public class MealController {
     @Autowired
     private final MealServiceImpl mealServiceImpl;
