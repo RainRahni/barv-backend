@@ -85,4 +85,40 @@
     <changeSet author="Rain" id="5">
         <addForeignKeyConstraint baseColumnNames="meal_id" baseTableName="meal_foods" constraintName="meal_foods_meal_id_fk" referencedColumnNames="id" referencedTableName="meal"/>
     </changeSet>
+    <changeSet author="Rain" id="6">
+        <createTable name="users">
+            <column autoIncrement="true" name="id" startWith="1" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="firstName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastName" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Rain" id="7">
+        <createTable name="user_meals">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meal_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <primaryKey columnNames="user_id,meal_id"/>
+            <foreignKey constraintName="fk_user_meals_user_id"
+                        foreignTableName="users" foreignColumnName="id"
+                        referencedTableName="user_meals" referencedColumnName="user_id"/>
+            <foreignKey constraintName="fk_user_meals_meal_id"
+                        foreignTableName="meal" foreignColumnName="id"
+                        referencedTableName="user_meals" referencedColumnName="meal_id"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

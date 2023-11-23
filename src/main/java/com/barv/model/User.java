@@ -2,6 +2,9 @@ package com.barv.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +21,11 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "user_meals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "meal_id")
+    )
     private List<Meal> meals;
 }
