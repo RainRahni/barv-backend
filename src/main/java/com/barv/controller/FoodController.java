@@ -1,9 +1,9 @@
-package com.barv.foodController;
+package com.barv.controller;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
-import com.barv.foodService.FoodServiceImpl;
+import com.barv.service.FoodServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;

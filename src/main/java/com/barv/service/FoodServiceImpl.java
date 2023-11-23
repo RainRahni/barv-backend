@@ -1,9 +1,9 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
-import com.barv.foodRepository.FoodRepository;
+import com.barv.repository.FoodRepository;
 import com.barv.model.MealType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

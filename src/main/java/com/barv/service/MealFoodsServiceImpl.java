@@ -1,7 +1,7 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
-import com.barv.foodRepository.MealFoodsRepository;
+import com.barv.repository.MealFoodsRepository;
 import com.barv.model.MealFoods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

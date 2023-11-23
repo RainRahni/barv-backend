@@ -1,8 +1,8 @@
-package com.barv.foodController;
+package com.barv.controller;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.MealNotFoundException;
-import com.barv.foodService.MealServiceImpl;
+import com.barv.service.MealServiceImpl;
 import com.barv.model.Meal;
 import com.barv.model.MealUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;

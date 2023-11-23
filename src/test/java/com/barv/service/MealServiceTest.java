@@ -1,7 +1,7 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import com.barv.model.Food;
-import com.barv.foodRepository.MealRepository;
+import com.barv.repository.MealRepository;
 import com.barv.model.Meal;
 import com.barv.model.MealFoods;
 import com.barv.model.MealType;

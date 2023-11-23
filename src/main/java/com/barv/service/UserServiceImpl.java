@@ -1,4 +1,4 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import org.springframework.stereotype.Service;
 

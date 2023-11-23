@@ -1,9 +1,9 @@
-package com.barv.foodController;
+package com.barv.controller;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
-import com.barv.foodService.FoodServiceImpl;
+import com.barv.service.FoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

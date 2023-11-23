@@ -1,8 +1,8 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
-import com.barv.foodRepository.FoodRepository;
+import com.barv.repository.FoodRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,4 +1,4 @@
-package com.barv.foodService;
+package com.barv.service;
 
 import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;

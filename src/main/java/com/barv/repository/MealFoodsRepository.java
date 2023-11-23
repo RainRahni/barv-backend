@@ -1,4 +1,4 @@
-package com.barv.foodRepository;
+package com.barv.repository;
 
 import com.barv.model.MealFoods;
 import org.springframework.data.jpa.repository.JpaRepository;

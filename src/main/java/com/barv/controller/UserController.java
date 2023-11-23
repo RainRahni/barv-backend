@@ -1,4 +1,4 @@
-package com.barv.foodController;
+package com.barv.controller;
 
 public class UserController {
 }

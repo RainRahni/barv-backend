@@ -1,6 +1,6 @@
-package com.barv.foodController;
+package com.barv.controller;
 
-import com.barv.foodService.MealFoodsServiceImpl;
+import com.barv.service.MealFoodsServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

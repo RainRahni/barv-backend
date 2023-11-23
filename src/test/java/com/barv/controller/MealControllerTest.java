@@ -1,11 +1,11 @@
-package com.barv.foodController;
+package com.barv.controller;
 
 import com.barv.model.Food;
-import com.barv.foodRepository.FoodRepository;
-import com.barv.foodRepository.MealRepository;
-import com.barv.foodService.FoodServiceImpl;
-import com.barv.foodService.MealFoodsServiceImpl;
-import com.barv.foodService.MealServiceImpl;
+import com.barv.repository.FoodRepository;
+import com.barv.repository.MealRepository;
+import com.barv.service.FoodServiceImpl;
+import com.barv.service.MealFoodsServiceImpl;
+import com.barv.service.MealServiceImpl;
 import com.barv.model.Meal;
 import com.barv.model.MealFoods;
 import com.barv.model.MealType;

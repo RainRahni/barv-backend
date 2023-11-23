@@ -1,4 +1,4 @@
-package com.barv.food;
+package com.barv.exception;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
