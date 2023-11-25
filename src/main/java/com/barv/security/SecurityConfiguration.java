@@ -19,7 +19,7 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("user/register").permitAll()
+                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**").permitAll()
                         .anyRequest().permitAll());
         return http.build();
     }

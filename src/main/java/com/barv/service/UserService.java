@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
     void registerUser(CreateUserRequest request);
+
+    void loginUser(CreateUserRequest request);
 }

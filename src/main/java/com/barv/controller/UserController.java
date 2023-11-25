@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserServiceImpl userService;
     @Transactional
-    @PostMapping("/register")
+    @PostMapping("public/register")
     public void registerUser(@RequestBody CreateUserRequest request) {
         userService.registerUser(request);
+    }
+    @Transactional
+    @PostMapping("public/login")
+    public void loginUser(@RequestBody CreateUserRequest request) {
+        userService.loginUser(request);
     }
 }
