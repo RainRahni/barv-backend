@@ -1,6 +1,5 @@
 package com.barv.service;
 
-import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.repository.MealFoodsRepository;
 import com.barv.model.MealFoods;
 import org.springframework.beans.factory.annotation.Autowired;

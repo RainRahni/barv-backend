@@ -9,11 +9,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 @ResponseStatus
-public class RestResponseEntityExceptionHandler
+public class ErrorHandler
         extends ResponseEntityExceptionHandler {
-    @ExceptionHandler
-    public ResponseEntity<ErrorMessage> foodNotFound(FoodNotFoundException exception) {
-        ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        return new ResponseEntity<>(new ErrorResponse("Internal Server error"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @ExceptionHandler(ApplicationException.class)
+    public ResponseEntity<ErrorResponse> handleException(ApplicationException e) {
+        return new ResponseEntity<>(new ErrorResponse("Internal Server error"), HttpStatus.BAD_REQUEST);
     }
 }

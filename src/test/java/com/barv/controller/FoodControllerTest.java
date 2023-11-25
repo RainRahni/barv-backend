@@ -1,7 +1,5 @@
 package com.barv.controller;
 
-import com.barv.exception.FoodAlreadyInDatabaseException;
-import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
 import com.barv.service.FoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

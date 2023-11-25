@@ -1,7 +1,5 @@
 package com.barv.service;
 
-import com.barv.exception.FoodAlreadyInDatabaseException;
-import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
 import com.barv.repository.FoodRepository;
 import com.barv.model.MealType;
