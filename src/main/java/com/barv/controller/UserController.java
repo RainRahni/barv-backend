@@ -4,6 +4,7 @@ import com.barv.security.CreateUserRequest;
 import com.barv.service.UserServiceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,11 @@ public class UserController {
     }
     @Transactional
     @PostMapping("public/login")
-    public void loginUser(@RequestBody CreateUserRequest request) {
-        userService.loginUser(request);
+    public String loginUser(@RequestBody CreateUserRequest request) {
+        return userService.loginUser(request);
+    }
+    @GetMapping("test")
+    public String test() {
+        return "test";
     }
 }

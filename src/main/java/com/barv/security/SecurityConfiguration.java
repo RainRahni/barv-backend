@@ -19,8 +19,8 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**").permitAll()
-                        .anyRequest().permitAll());
+                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("user/public/**").permitAll()
+                        .anyRequest().authenticated());
         return http.build();
     }
 }

@@ -8,5 +8,5 @@ public interface UserService {
 
     void registerUser(CreateUserRequest request);
 
-    void loginUser(CreateUserRequest request);
+    String loginUser(CreateUserRequest request);
 }
