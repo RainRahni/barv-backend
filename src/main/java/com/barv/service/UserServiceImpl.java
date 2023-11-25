@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     //public and private key better for sign in,  not password.
+    private final Key jwtSecretKey = Keys.hmacShaKeyFor("Your super secret key that no one can quess".getBytes());
+
     @Override
     public void registerUser(CreateUserRequest request) {
         //TODO check if email not in database
