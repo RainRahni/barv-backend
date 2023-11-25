@@ -7,6 +7,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 public class SecurityConfiguration {
     @Bean
@@ -18,7 +19,7 @@ public class SecurityConfiguration {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("/public/**").permitAll()
+                ).authorizeHttpRequests(authorize -> authorize.requestMatchers("user/register").permitAll()
                         .anyRequest().permitAll());
         return http.build();
     }

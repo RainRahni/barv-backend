@@ -5,6 +5,7 @@ import com.barv.exception.MealNotFoundException;
 import com.barv.service.MealServiceImpl;
 import com.barv.model.Meal;
 import com.barv.model.MealUpdateRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +19,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "meal" )
+@RequiredArgsConstructor
 public class MealController {
-    @Autowired
     private final MealServiceImpl mealServiceImpl;
-    @Autowired
-    public MealController(MealServiceImpl mealServiceImpl) { this.mealServiceImpl = mealServiceImpl; }
     @PostMapping("/addMeal")
     public Meal addMeal(@RequestBody Meal meal) throws FoodAlreadyInDatabaseException {
         return mealServiceImpl.addMeal(meal);

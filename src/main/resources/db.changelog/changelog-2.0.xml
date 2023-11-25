@@ -1,19 +1,10 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="your_name" id="your_id">
-        <createType type="enum" name="meal_type">
-            <value>BREAKFAST</value>
-            <value>PRE_LUNCH</value>
-            <value>LUNCH</value>
-            <value>PRE_DINNER</value>
-            <value>DINNER</value>
-            <value>SNACK</value>
-        </createType>
-    </changeSet>
+
     <changeSet author="Rain" id="1">
-        <createTable name="food">
+        <createTable tableName="food">
             <column autoIncrement="true" name="id" startWith="1" type="bigint">
-                <contstraints nullable="false" primaryKey="true" primaryKeyName="food_pkey"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="food_pkey"/>
             </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -28,7 +19,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="fats" type="double precision">
-                <contstraints nullable="false"/>
+                <constraints nullable="false"/>
             </column>
             <column name="weight_in_grams" type="INTEGER">
                 <constraints nullable="false"/>
@@ -36,7 +27,7 @@
         </createTable>
     </changeSet>
     <changeSet author="Rain" id="2">
-        <createTable name="meal">
+        <createTable tableName="meal">
             <column autoIncrement="true" name="id" startWith="1" type="bigint">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="meal_pkey"/>
             </column>
@@ -61,8 +52,8 @@
         </createTable>
     </changeSet>
     <changeSet author="Rain" id="3">
-        <createTable name="meal_foods">
-            <column autoIncrement="true" name="id" startWith="1" type="bigint" defaultValueComputed="nextval('public.meal_foods_sequence'::REGCLASS)">
+        <createTable tableName="meal_foods">
+            <column autoIncrement="true" name="id" startWith="1" type="bigint">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="meal_foods_pkey"/>
             </column>
             <column name="name" type="VARCHAR(255)">
@@ -86,7 +77,7 @@
         <addForeignKeyConstraint baseColumnNames="meal_id" baseTableName="meal_foods" constraintName="meal_foods_meal_id_fk" referencedColumnNames="id" referencedTableName="meal"/>
     </changeSet>
     <changeSet author="Rain" id="6">
-        <createTable name="users">
+        <createTable tableName="users">
             <column autoIncrement="true" name="id" startWith="1" type="bigint">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
             </column>
@@ -105,20 +96,17 @@
         </createTable>
     </changeSet>
     <changeSet author="Rain" id="7">
-        <createTable name="user_meals">
+        <createTable tableName="user_meals">
             <column name="user_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true " foreignKeyName="fk_user_meals_user_id" references="users(id)"/>
             </column>
             <column name="meal_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true" foreignKeyName="fk_user_meals_meal_id" references="meal(id)" />
             </column>
-            <primaryKey columnNames="user_id,meal_id"/>
-            <foreignKey constraintName="fk_user_meals_user_id"
-                        foreignTableName="users" foreignColumnName="id"
-                        referencedTableName="user_meals" referencedColumnName="user_id"/>
-            <foreignKey constraintName="fk_user_meals_meal_id"
-                        foreignTableName="meal" foreignColumnName="id"
-                        referencedTableName="user_meals" referencedColumnName="meal_id"/>
         </createTable>
+    </changeSet>
+    <changeSet author="Rain" id="8">
+        <renameColumn tableName="users" oldColumnName="firstName" newColumnName="first_name" />
+        <renameColumn tableName="users" oldColumnName="lastName" newColumnName="last_name"/>
     </changeSet>
 </databaseChangeLog>

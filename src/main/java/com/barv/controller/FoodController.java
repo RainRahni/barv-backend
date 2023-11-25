@@ -4,6 +4,7 @@ import com.barv.exception.FoodAlreadyInDatabaseException;
 import com.barv.exception.FoodNotFoundException;
 import com.barv.model.Food;
 import com.barv.service.FoodServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,22 +20,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "food" )
+@RequiredArgsConstructor
 public class FoodController {
     private final FoodServiceImpl foodService;
-
-    /**
-     * Constructor for food controller.
-     * @param foodService where will all the methods be at.
-     */
-    @Autowired
-    public FoodController(FoodServiceImpl foodService) {
-        this.foodService = foodService;
-    }
-
-    /**
-     * Get food with certain id.
-     * @param foodId id which food to
-     */
     @GetMapping(path = "/{foodId}")
     public Food getFoodWithId(@PathVariable("foodId") Long foodId) throws FoodNotFoundException {
         return foodService.getFoodById(foodId);
