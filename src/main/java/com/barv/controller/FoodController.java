@@ -21,49 +21,26 @@ import java.util.List;
 public class FoodController {
     private final FoodServiceImpl foodService;
     @GetMapping(path = "/{foodId}")
-    public Food getFoodWithId(@PathVariable("foodId") Long foodId) throws FoodNotFoundException {
+    public Food getFoodWithId(@PathVariable("foodId") Long foodId) {
         return foodService.getFoodById(foodId);
     }
-
-    /**
-     * Get all foods in database.
-     * @return list of foods in database.
-     */
     @GetMapping(path = "/allFoods")
     public List<Food> getAllFoods() {
         return foodService.findAllFoods();
     }
 
-    /**
-     * Add given food to database.
-     * @param food that will be added to database.
-     * @return whether adding was successful or not.
-     */
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/addFood")
-    public Food addNewFood(@RequestBody Food food) throws FoodAlreadyInDatabaseException {
+    public Food addNewFood(@RequestBody Food food) {
         return foodService.addFood(food);
     }
-
-    /**
-     * Delete food with given id from database.
-     * @param foodId id of the food to be removed from the database.
-     * @return whether deleting was successful or not.
-     */
     @DeleteMapping(path = "/del{foodId}")
-    public String deleteFood(@PathVariable("foodId") Long foodId) throws FoodNotFoundException {
+    public String deleteFood(@PathVariable("foodId") Long foodId) {
         return foodService.removeFood(foodId);
     }
-
-    /**
-     * Update existing food with given id, with given food.
-     * @param foodId id of the food that will be updated.
-     * @param food food whose attributes are set to existing food.
-     * @return whether updating was successful or not.
-     */
     @PutMapping(path = "/upt{foodId}")
     public String updateFoodDetails(@PathVariable("foodId") Long foodId,
-                           @RequestBody Food food) throws FoodAlreadyInDatabaseException, FoodNotFoundException {
+                           @RequestBody Food food) {
         return foodService.updateFood(foodId, food);
     }
 }

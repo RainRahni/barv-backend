@@ -7,9 +7,9 @@ import java.util.List;
 
 @Service
 public interface FoodService {
-    Food getFoodById(Long foodId) throws FoodNotFoundException;
-    Food addFood(Food food) throws FoodAlreadyInDatabaseException;
+    Food getFoodById(Long foodId);
+    Food addFood(Food food);
     List<Food> findAllFoods();
-    String removeFood(Long foodId) throws FoodNotFoundException;
-    String updateFood(Long foodId, Food food) throws FoodNotFoundException, FoodAlreadyInDatabaseException;
+    String removeFood(Long foodId);
+    String updateFood(Long foodId, Food food);
 }

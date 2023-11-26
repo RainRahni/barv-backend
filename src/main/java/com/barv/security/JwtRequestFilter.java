@@ -25,7 +25,7 @@ import java.util.Optional;
 @Component
 @AllArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
-    private final Key jwtSecretKey = Keys.hmacShaKeyFor("Your super secret key that no one can quess".getBytes());
+    private final Key jwtSecretKey = Keys.hmacShaKeyFor("Yourasuperasecretakeyathatanoaoneacanaquess".getBytes());
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -47,7 +47,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (header == null || !header.startsWith("Bearer")) {
             return Optional.empty();
         }
-        return Optional.of(header.substring("Bearer".length()));
+        return Optional.of(header.substring("Bearer".length()).trim());
     }
     private Claims parseToken(String token) {
         return Jwts.parser()

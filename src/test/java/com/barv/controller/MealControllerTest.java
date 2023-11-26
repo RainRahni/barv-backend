@@ -55,7 +55,7 @@ class MealControllerTest {
                 .carbohydrates(12)
                 .weightInGrams(9)
                 .calories(200)
-                .Id(1L)
+                .id(1L)
                 .build();
         foodTwo = Food.builder()
                 .protein(2)
@@ -64,7 +64,7 @@ class MealControllerTest {
                 .carbohydrates(12)
                 .weightInGrams(9)
                 .calories(200)
-                .Id(2L)
+                .id(2L)
                 .build();
         meal = Meal.builder()
                 .mealId(1L)
@@ -86,7 +86,7 @@ class MealControllerTest {
                     .carbohydrates(12)
                     .weightInGrams(9)
                     .calories(200)
-                    .Id(1L)
+                    .id(1L)
                     .build();
             foodTwo = Food.builder()
                     .protein(2)
@@ -95,7 +95,7 @@ class MealControllerTest {
                     .carbohydrates(12)
                     .weightInGrams(9)
                     .calories(200)
-                    .Id(2L)
+                    .id(2L)
                     .build();
             meal = Meal.builder()
                     .mealId(1L)

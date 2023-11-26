@@ -8,6 +8,7 @@ import com.barv.security.CreateUserRequest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,21 +25,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     //public and private key better for sign in,  not password.
-    private final Key jwtSecretKey = Keys.hmacShaKeyFor("Your super secret key that no one can quess".getBytes());
+    private final Key jwtSecretKey = Keys.hmacShaKeyFor("Yourasuperasecretakeyathatanoaoneacanaquess".getBytes());
 
     @Override
+    @Transactional
     public void registerUser(CreateUserRequest request) {
         User userInDatabase = userRepository.findByEmail(request.email());
         if (userInDatabase != null) {
             throw new ApplicationException("Email already registered");
         }
-        User user = userMapper.toUserEntity(request.user());
-        user.setEmail(request.email()); 
-        user.setPassword(passwordEncoder.encode(request.password()));
-        userRepository.save(user);
+        User userEntity = userMapper.toEntity(request.user());
+        userEntity.setEmail(request.email());
+        userEntity.setPassword(passwordEncoder.encode(request.password()));
+        userRepository.save(userEntity);
     }
 
     @Override
+    @Transactional
     public String loginUser(CreateUserRequest request) {
         String encodedPassword = userRepository.findByEmail(request.email()).getPassword();
         boolean matches = passwordEncoder.matches(request.password(), encodedPassword);

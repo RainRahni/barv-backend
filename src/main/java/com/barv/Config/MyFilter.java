@@ -1,4 +1,4 @@
-package com.barv.Config;
+package com.barv.config;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException, ServletException, IOException {
+            throws ServletException, IOException {
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("Access-Control-Allow-Private-Network", "true");
         filterChain.doFilter(servletRequest, servletResponse);

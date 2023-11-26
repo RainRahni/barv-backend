@@ -7,6 +7,6 @@ import java.util.List;
 
 @Service
 public interface MealFoodsService {
-    MealFoods addMealFood(MealFoods mealFoods) throws FoodAlreadyInDatabaseException;
+    MealFoods addMealFood(MealFoods mealFoods);
     List<MealFoods> deleteMealFoodsWithNullValues();
 }

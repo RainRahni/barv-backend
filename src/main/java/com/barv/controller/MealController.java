@@ -20,7 +20,7 @@ import java.util.List;
 public class MealController {
     private final MealServiceImpl mealServiceImpl;
     @PostMapping("/addMeal")
-    public Meal addMeal(@RequestBody Meal meal) throws FoodAlreadyInDatabaseException {
+    public Meal addMeal(@RequestBody Meal meal) {
         return mealServiceImpl.addMeal(meal);
     }
 
@@ -30,12 +30,12 @@ public class MealController {
     }
 
     @GetMapping("/name={mealName}")
-    public Meal getMealWithGivenName(@PathVariable("mealName") String mealName) throws MealNotFoundException {
+    public Meal getMealWithGivenName(@PathVariable("mealName") String mealName) {
         return mealServiceImpl.getMealWithGivenName(mealName);
     }
 
     @PutMapping("/updateMeal")
-    public Meal updateExistingMeal(@RequestBody MealUpdateRequest updateRequest) throws FoodAlreadyInDatabaseException {
+    public Meal updateExistingMeal(@RequestBody MealUpdateRequest updateRequest) {
         Meal currentMeal = updateRequest.getCurrentMeal();
         Meal newMeal = updateRequest.getNewMeal();
         return mealServiceImpl.updateExistingMeal(currentMeal, newMeal);
