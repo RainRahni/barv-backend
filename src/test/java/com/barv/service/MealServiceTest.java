@@ -13,6 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+
 @SpringBootTest
 class MealServiceTest {
     @Autowired
@@ -34,7 +36,7 @@ class MealServiceTest {
                 .carbohydrates(12)
                 .weightInGrams(9)
                 .calories(200)
-                .Id(1L)
+                .id(1L)
                 .build();
         foodTwo = Food.builder()
                 .protein(2)
@@ -43,7 +45,7 @@ class MealServiceTest {
                 .carbohydrates(12)
                 .weightInGrams(9)
                 .calories(200)
-                .Id(2L)
+                .id(2L)
                 .build();
         meal = Meal.builder()
                 .mealId(1L)
@@ -56,8 +58,9 @@ class MealServiceTest {
                 .name("Breakfast-400")
                 .build();
     }
-
     @Test
-    void addMeal() {
+    void test() {
+        assertEquals("1", 1 ,1);
     }
+
 }

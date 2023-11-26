@@ -1,9 +1,11 @@
 package com.barv.service;
 
+import com.barv.exception.ApplicationException;
 import com.barv.model.Food;
 import com.barv.repository.FoodRepository;
 import com.barv.model.MealType;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,88 +18,30 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class FoodServiceImpl implements FoodService {
-    @Autowired
     private final FoodRepository foodRepository;
-
-    /**
-     * Constructor for Food Service.
-     * @param foodRepository where data is stored.
-     */
-
-    public FoodServiceImpl(FoodRepository foodRepository) {
-        this.foodRepository = foodRepository;
-    }
-    public Food getFoodById(Long foodId) throws FoodNotFoundException {
+    public Food getFoodById(Long foodId)  {
         Optional<Food> potentialFood = foodRepository.findById(foodId);
         if (potentialFood.isEmpty()) {
-            throw new FoodNotFoundException("No food with this Id in the database!");
+            throw new ApplicationException("No food with this Id in the database!");
         }
         return potentialFood.get();
     }
-    /**
-     * Add given food to database.
-     * @param food to be added to database.
-     * @return whether adding to database was successful.
-     */
-    public Food addFood(Food food) throws FoodAlreadyInDatabaseException {
+    public Food addFood(Food food) {
         if (foodRepository.findAll().contains(food)) {
-            throw new FoodAlreadyInDatabaseException("Food is already in the database!");
+            throw new ApplicationException("Food is already in the database!");
         }
         foodRepository.save(food);
         return food;
     }
-
-    /**
-     * Create new table into the database.
-     * @param tableName where is meal type and how many calories.
-     * @param mealType that determines into which ...
-     */
-    public void createTable(String tableName, MealType mealType) {
-        String url = "jdbc:postgresql://barv-hornet-8737.8nj.cockroachlabs.cloud:26257/defaultdb";
-        String username = "rainrhni";
-        String password = "1PPDl4WIKqOnWCtShGoRqg";
-
-        // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (\n"
-                + " id int NOT NULL AUTO_INCREMENT,\n"
-                + " " + "calories" + " varchar(255),\n"
-                + " " + "protein" + " varchar(255),\n"
-                + " " + "carbohydrates" + " varchar(255),\n"
-                + " " + "fats" + " varchar(255),\n"
-                + " " + mealType + " varchar(255),\n"
-                + " PRIMARY KEY (id)\n"
-                + ");";
-
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-            System.out.println("Table created successfully");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    /**
-     * Find all items in database.
-     * @return list of foods in database.
-     */
     public List<Food> findAllFoods() {
         return foodRepository.findAll();
     }
-
-    /**
-     * Remove food with given id from the database.
-     * @param foodId food`s id that should be removed.
-     * @return whether deleting from database was successful.
-     */
-    public String removeFood(Long foodId) throws FoodNotFoundException {
+    public String removeFood(Long foodId) {
         boolean exists = foodRepository.existsById(foodId);
         if (!exists) {
-            throw new FoodNotFoundException("Food with given id does not exist!");
+            throw new ApplicationException("Food with given id does not exist!");
         }
         foodRepository.deleteById(foodId);
         return String.format("Food with id %d successfully removed from the database!", foodId);
@@ -110,10 +54,10 @@ public class FoodServiceImpl implements FoodService {
      */
 
     @Transactional
-    public String updateFood(Long foodId, Food food) throws FoodNotFoundException, FoodAlreadyInDatabaseException {
+    public String updateFood(Long foodId, Food food) {
         Food existingFood = foodRepository
                 .findById(foodId)
-                .orElseThrow(FoodNotFoundException::new);
+                .orElseThrow();
         if (!Objects.equals(food, existingFood)) {
             existingFood.setName(food.getName());
             existingFood.setProtein(food.getProtein());
@@ -123,6 +67,6 @@ public class FoodServiceImpl implements FoodService {
             existingFood.setCalories(food.getCalories());
             return "Successfully changed food`s details!";
         }
-        throw new FoodAlreadyInDatabaseException("Food objects are equal already!");
+        throw new ApplicationException("Food objects are equal already!");
     }
 }

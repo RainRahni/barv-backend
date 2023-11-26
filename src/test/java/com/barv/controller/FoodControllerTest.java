@@ -1,5 +1,6 @@
 package com.barv.controller;
 
+import com.barv.exception.ApplicationException;
 import com.barv.model.Food;
 import com.barv.service.FoodServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ class FoodControllerTest {
                 .fats(12)
                 .weightInGrams(12)
                 .carbohydrates(15)
-                .Id(1L)
+                .id(1L)
                 .build();
     }
     @Test
@@ -61,7 +62,7 @@ class FoodControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
-    public void whenFoodInDatabase_thenThrowException() throws Exception {
+    void whenFoodInDatabase_thenThrowException() throws Exception {
         Food inputFood = Food.builder()
                 .name("awd")
                 .protein(12)
@@ -70,10 +71,10 @@ class FoodControllerTest {
                 .weightInGrams(12)
                 .carbohydrates(15)
                 .build();
-        Mockito.doThrow(new FoodAlreadyInDatabaseException()).when(foodService).addFood(inputFood);
+        Mockito.doThrow(new ApplicationException("da")).when(foodService).addFood(inputFood);
     }
     @Test
-    public void whenFoodWithIdValid_thenFound() throws Exception {
+     void whenFoodWithIdValid_thenFound() throws Exception {
         Mockito.when(foodService.getFoodById(1L)).thenReturn(food);
         mockMvc.perform(get("/api/v1/food/1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -81,13 +82,13 @@ class FoodControllerTest {
                 .andExpect(jsonPath("$.id").value(food.getId()));
     }
     @Test
-    public void whenFoodWithInvalidId_thenNotFound() throws Exception {
-        Mockito.when(foodService.getFoodById(100L)).thenThrow(FoodNotFoundException.class);
+     void whenFoodWithInvalidId_thenNotFound() throws Exception {
+        Mockito.when(foodService.getFoodById(100L)).thenThrow(ApplicationException.class);
         mockMvc.perform(get("/api/v1/food/100").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
     @Test
-    public void whenFoodWithValidId_thenDeleteFood() throws Exception {
+     void whenFoodWithValidId_thenDeleteFood() throws Exception {
         Mockito.when(foodService.removeFood(1L))
                 .thenReturn("Food with id 1 successfully removed from the database!");
         mockMvc.perform(delete("/api/v1/food/del1")
@@ -95,14 +96,14 @@ class FoodControllerTest {
                 .andExpect(status().is2xxSuccessful());
     }
     @Test
-    public void whenFoodWithInvalidId_thenThrowsNoFoodException() throws Exception {
-        Mockito.when(foodService.removeFood(100L)).thenThrow(FoodNotFoundException.class);
+     void whenFoodWithInvalidId_thenThrowsNoFoodException() throws Exception {
+        Mockito.when(foodService.removeFood(100L)).thenThrow(ApplicationException.class);
         mockMvc.perform(delete("/api/v1/food/del100").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
-                .andExpect(result -> assertTrue(result.getResolvedException() instanceof FoodNotFoundException));
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof ApplicationException));
     }
     @Test
-    public void whenUpdatingFoodWithInvalidId_thenThrowsNoFoodException() throws Exception {
+     void whenUpdatingFoodWithInvalidId_thenThrowsNoFoodException() throws Exception {
         Food inputFood = Food.builder()
                 .name("howdy")
                 .protein(12)
@@ -111,12 +112,12 @@ class FoodControllerTest {
                 .weightInGrams(12)
                 .carbohydrates(15)
                 .build();
-        Mockito.when(foodService.updateFood(100L, inputFood)).thenThrow(FoodNotFoundException.class);
+        Mockito.when(foodService.updateFood(100L, inputFood)).thenThrow(ApplicationException.class);
         mockMvc.perform(put("/upt100").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
     @Test
-    public void whenUpdatingFoodWithExactSameObject_thenThrowFoodAlreadyExistsException()
+     void whenUpdatingFoodWithExactSameObject_thenThrowFoodAlreadyExistsException()
             throws Exception {
         Food inputFood = Food.builder()
                 .name("awd")
@@ -126,7 +127,7 @@ class FoodControllerTest {
                 .weightInGrams(12)
                 .carbohydrates(15)
                 .build();
-        Mockito.when(foodService.updateFood(1L, inputFood)).thenThrow(FoodAlreadyInDatabaseException.class);
+        Mockito.when(foodService.updateFood(1L, inputFood)).thenThrow(ApplicationException.class);
         mockMvc.perform(put("/upt1").contentType(MediaType.APPLICATION_JSON).content("{\n" +
                 "    \"name\": \"awd\",\n" +
                 "    \"protein\": 12,\n" +
@@ -138,7 +139,7 @@ class FoodControllerTest {
                 .andExpect(status().is4xxClientError());
     }
     @Test
-    public void whenUpdatingFoodWithValidObject_thenChangeDetails()
+     void whenUpdatingFoodWithValidObject_thenChangeDetails()
             throws Exception {
         Food inputFood = Food.builder()
                 .name("adt")

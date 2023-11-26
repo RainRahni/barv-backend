@@ -11,12 +11,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ResponseStatus
 public class ErrorHandler
         extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception e) {
-        return new ResponseEntity<>(new ErrorResponse("Internal Server error"), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorResponse> handleException(ApplicationException e) {
-        return new ResponseEntity<>(new ErrorResponse("Internal Server error"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(new ErrorResponse("Internal Server error"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

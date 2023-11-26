@@ -30,8 +30,8 @@ class FoodRepositoryTest {
     }
 
     @Test
-    public void whenValidId_thenFoodFound() {
+    void whenValidId_thenFoodFound() {
         Food food = foodRepository.findById(1L).get();
-        assertEquals(food.getName(), "Kiivi");
+        assertEquals("Kiivi", food.getName());
     }
 }

@@ -1,21 +1,18 @@
 package com.barv.service;
 
-import com.barv.repository.MealFoodsRepository;
 import com.barv.model.MealFoods;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.barv.repository.MealFoodsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MealFoodsServiceImpl implements MealFoodsService {
-    @Autowired
     private final MealFoodsRepository mealFoodsRepository;
-    public MealFoodsServiceImpl(MealFoodsRepository mealFoodsRepository) {
-        this.mealFoodsRepository = mealFoodsRepository;
-    }
     @Override
-    public MealFoods addMealFood(MealFoods mealFoods) throws FoodAlreadyInDatabaseException {
+    public MealFoods addMealFood(MealFoods mealFoods) {
         if (mealFoods.getId() == null || !mealFoodsRepository.existsById(mealFoods.getId())) {
             mealFoodsRepository.save(mealFoods);
         }
