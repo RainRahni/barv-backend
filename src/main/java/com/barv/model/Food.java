@@ -8,15 +8,15 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigInteger;
+import lombok.Setter;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
@@ -32,7 +32,7 @@ public class Food {
             strategy = GenerationType.SEQUENCE,
             generator = "food_sequence"
     )
-    @EqualsAndHashCode.Exclude private Long Id;
+    @EqualsAndHashCode.Exclude private Long id;
     private String name;
     private double carbohydrates;
     private double protein;

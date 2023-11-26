@@ -1,4 +1,4 @@
-package com.barv.Config;
+package com.barv.config;
 
 import com.google.firebase.database.annotations.Nullable;
 import jakarta.servlet.http.HttpServletRequest;

@@ -7,17 +7,20 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +46,8 @@ public class Meal {
     private double fats;
     @Enumerated(EnumType.STRING)
     private MealType type;
+    @ManyToMany(mappedBy = "meals")
+    private List<User> users;
     @OneToMany
     private List<Food> foods;
     public void addFoodsToList(List<Food> foodsToAdd) {
