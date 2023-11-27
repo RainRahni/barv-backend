@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     //public and private key better for sign in,  not password.
     private final Key jwtSecretKey = Keys.hmacShaKeyFor("Yourasuperasecretakeyathatanoaoneacanaquess".getBytes());
-
     @Override
     @Transactional
     public void registerUser(CreateUserRequest request) {
@@ -39,7 +38,6 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(userEntity);
     }
-
     @Override
     @Transactional
     public String loginUser(CreateUserRequest request) {
