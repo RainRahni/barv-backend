@@ -1,12 +1,12 @@
 package com.barv.service;
 
-import com.barv.security.CreateUserRequest;
+import com.barv.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
 
-    void registerUser(CreateUserRequest request);
+    void registerUser(UserDTO userDTO);
 
-    String loginUser(CreateUserRequest request);
+    String loginUser(UserDTO userDTO);
 }

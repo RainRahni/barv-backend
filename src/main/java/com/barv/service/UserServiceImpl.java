@@ -1,10 +1,10 @@
 package com.barv.service;
 
+import com.barv.dto.UserDTO;
 import com.barv.exception.ApplicationException;
 import com.barv.mapper.UserMapper;
 import com.barv.model.User;
 import com.barv.repository.UserRepository;
-import com.barv.security.CreateUserRequest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -28,26 +28,26 @@ public class UserServiceImpl implements UserService {
     private final Key jwtSecretKey = Keys.hmacShaKeyFor("Yourasuperasecretakeyathatanoaoneacanaquess".getBytes());
     @Override
     @Transactional
-    public void registerUser(CreateUserRequest request) {
-        User userInDatabase = userRepository.findByEmail(request.email());
+    public void registerUser(UserDTO user) {
+        User userInDatabase = userRepository.findByEmail(user.email());
         if (userInDatabase != null) {
             throw new ApplicationException("Email already registered");
         }
-        User userEntity = userMapper.toEntity(request.user());
-        userEntity.setEmail(request.email());
-        userEntity.setPassword(passwordEncoder.encode(request.password()));
+        User userEntity = userMapper.toUserEntity(user);
+        userEntity.setPassword(passwordEncoder.encode(user.password()));
+        System.out.println();
         userRepository.save(userEntity);
     }
     @Override
     @Transactional
-    public String loginUser(CreateUserRequest request) {
-        String encodedPassword = userRepository.findByEmail(request.email()).getPassword();
-        boolean matches = passwordEncoder.matches(request.password(), encodedPassword);
+    public String loginUser(UserDTO user) {
+        String encodedPassword = userRepository.findByEmail(user.email()).getPassword();
+        boolean matches = passwordEncoder.matches(user.password(), encodedPassword);
         if (!matches) {
             throw new ApplicationException("Wrong email or password");
         }
         Map<String, Object> claims = new HashMap<>();
-        claims.put("email", request.email());
+        claims.put("email", user.email());
         return Jwts.builder()
                 .subject("towho")
                 .claims(claims)

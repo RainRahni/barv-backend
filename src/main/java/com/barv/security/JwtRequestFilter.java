@@ -53,7 +53,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         return Jwts.parser()
                 .setSigningKey(jwtSecretKey)
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
     private Authentication buildAuthToken(Claims claims) {

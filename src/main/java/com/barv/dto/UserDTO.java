@@ -1,4 +1,4 @@
 package com.barv.dto;
 
-public record UserDTO(Long id, String firstName, String lastName) {
+public record UserDTO(String firstName, String lastName, String email, String password) {
 }
